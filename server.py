@@ -8,7 +8,7 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_address = ('0.0.0.0', 8080)
 print("Starting up on port 8080")
 sock.bind(server_address)
-sock.listen(5)
+sock.listen(20)
 print("Waiting for first connection")
 
 # Handle individual connection
@@ -23,9 +23,7 @@ def socketthread(connection):
                 # First Loop to reach end of file
                 while True:
                     line = f.readline()
-                    if line:
-                        pass
-                    else:
+                    if not line:
                         break
                 # Second Loop to read new lines
                 while True:

@@ -17,4 +17,4 @@
       
   handlers:
     - name: "Start remote-tail"
-      shell: "python /home/ubuntu/remote-tail/server.py"
+      shell: "nohup python /home/ubuntu/remote-tail/server.py > /dev/null &"

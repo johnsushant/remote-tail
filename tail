@@ -1,0 +1,19 @@
+#!/usr/bin/env python
+
+import socket
+import sys
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server_address = ('localhost', 8080)
+sock.connect(server_address)
+input_file = sys.argv[1]
+print(input_file)
+sock.sendall(input_file)
+
+try:
+    while True:
+        data = sock.recv(1024)
+        print(data)
+finally:
+    sock.close()
+    

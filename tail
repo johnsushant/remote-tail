@@ -13,6 +13,7 @@ try:
     while True:
         data = sock.recv(1024)
         print(data)
+        sys.stdout.flush()
 finally:
     sock.close()
     

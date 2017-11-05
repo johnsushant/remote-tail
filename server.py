@@ -2,7 +2,6 @@
 
 import socket
 import thread
-from tailf import tailf
 
 # Setup server
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -20,9 +19,20 @@ def socketthread(connection):
             input_file = connection.recv(1024)
             print('Connection from', client_address)
             # Handle Tail infinitely - This is blocking
-            for line in tailf(input_file):
-                print(line)
-                connection.sendall(line)
+            with open(input_file) as f:
+                # First Loop to reach end of file
+                while True:
+                    line = f.readline()
+                    if line:
+                        pass
+                    else:
+                        break
+                # Second Loop to read new lines
+                while True:
+                    line = f.readline()
+                    if line:
+                        print(line)
+                        connection.sendall(line)
         except socket.error:
             connection.close()
         finally:

@@ -13,8 +13,10 @@ while True:
     print("Waiting for connection")
     connection, client_address = sock.accept()
     try:
+        # Recieve input file to be tailed from client
         input_file = connection.recv(1024)
         print('Connection from', client_address)
+        # Handle Tail Infinitely until connection is closed
         while True:
             for line in tailf(input_file):
                 print(line)

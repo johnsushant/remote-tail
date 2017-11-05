@@ -1,0 +1,20 @@
+---
+
+- hosts: all
+  become: true
+
+  tasks:
+    - name: "Install Git"
+      apt:
+        name: git
+        state: latest
+    
+    - name: "Clone remote-tail git repo"
+      git:
+        repo: "https://github.com/johnsushant/remote-tail"
+        dest: /home/ubuntu/remote-tail
+      notify: "Start remote-tail"
+      
+  handlers:
+    - name: "Start remote-tail"
+      shell: "python /home/ubuntu/remote-tail/server.py"

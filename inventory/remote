@@ -1,0 +1,2 @@
+[default]
+54.255.233.190 ansible_connection=ssh

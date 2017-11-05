@@ -19,5 +19,7 @@ while True:
             for line in tailf(input_file):
                 print(line)
                 connection.sendall(line)
+    except socket.error:
+        connection.close()
     finally:
         connection.close()

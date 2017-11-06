@@ -8,6 +8,12 @@ Instructions :-
 2) Run ./tail "name-of-file" to tail it.
 
 
+Deploy Natively :
 ```
 ansible-playbook -i inventory/remote playbooks/deploy.yaml
+```
+
+Deploy inside a docker container :
+```
+ansible-playbook -i inventory/remote playbooks/deploy-docker.yaml
 ```

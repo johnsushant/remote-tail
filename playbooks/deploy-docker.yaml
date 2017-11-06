@@ -1,0 +1,31 @@
+---
+
+- hosts: all
+  become: true
+
+  tasks:
+    - name: "Install Git"
+      apt:
+        name: git
+        state: latest
+    
+    - name: "Clone remote-tail git repo"
+      git:
+        repo: "https://github.com/johnsushant/remote-tail"
+        dest: /home/ubuntu/remote-tail
+        force: true
+
+    - name: "Build a new docker image"
+      docker_image:
+        name: remote-tail
+        path: /home/ubuntu/remote-tail
+
+    - name: "Deploy the container"
+      docker_container:
+        name: remote-tail
+        image: remote-tail
+        ports:
+          - "8080:8080"
+        state: started
+        volumes:
+          - "/var/log/:/var/log"
